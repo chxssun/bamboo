@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21daf45c-5552-4b18-811d-5d638d248ea1" name="Changes" comment="month view 오류 해결">
-      <change afterPath="$PROJECT_DIR$/.idea/bamboo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/app/(tabs)/(diary)/diaryView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/app/(tabs)/(diary)/diaryView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/app/(tabs)/(diary)/monthView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/app/(tabs)/(diary)/monthView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/components/Config.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/components/Config.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/NotificationMessageLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/controller/DiaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/controller/DiaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/controller/FeedbackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/controller/FeedbackController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/service/DiaryPhotoService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/service/DiaryPhotoUrlService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/service/DiaryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/service/DiaryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pleasee/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/pleasee/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="21daf45c-5552-4b18-811d-5d638d248ea1" name="Changes" comment="month view 오류 해결" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,42 +58,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_flatOrder0&quot;: &quot;0&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_flatOrder1&quot;: &quot;1&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_flatOrder2&quot;: &quot;2&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_flatOrder3&quot;: &quot;3&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_flatWidth0&quot;: &quot;447&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_flatWidth1&quot;: &quot;447&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_flatWidth2&quot;: &quot;448&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_flatWidth3&quot;: &quot;447&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_treeOrder0&quot;: &quot;0&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_treeOrder1&quot;: &quot;1&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_treeOrder2&quot;: &quot;2&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_treeOrder3&quot;: &quot;3&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_treeWidth0&quot;: &quot;447&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_treeWidth1&quot;: &quot;447&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_treeWidth2&quot;: &quot;448&quot;,
-    &quot;FileHistory.git4idea.history.GitHistoryProvider_treeWidth3&quot;: &quot;447&quot;,
-    &quot;Gradle.pleasee [:org.example.please.PleaseApplication.main()].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jin/Desktop/bambooo/my-app&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.excludes&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\jin\\Desktop\\bambooo\\my-app\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "FileHistory.git4idea.history.GitHistoryProvider_flatOrder0": "0",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatOrder1": "1",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatOrder2": "2",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatOrder3": "3",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatWidth0": "447",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatWidth1": "447",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatWidth2": "448",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatWidth3": "447",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeOrder0": "0",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeOrder1": "1",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeOrder2": "2",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeOrder3": "3",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeWidth0": "447",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeWidth1": "447",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeWidth2": "448",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeWidth3": "447",
+    "Gradle.pleasee [:org.example.please.PleaseApplication.main()].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/chxss/OneDrive/Desktop/AiSchool/bamboo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
+    "ts.external.directory.path": "C:\\Users\\jin\\Desktop\\bambooo\\my-app\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="애플리케이션.PleaseApplication">
     <configuration name="PleaseApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.please.PleaseApplication" />
