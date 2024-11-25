@@ -59,7 +59,6 @@ export default function MyPage() {
     const [starAnimations] = useState(createStarAnimations());
 
     // 별 애니메이션
-    console.log("Test Change");
 
     const animateStars = () => {
         starAnimations.forEach((star) => {
