@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="21daf45c-5552-4b18-811d-5d638d248ea1" name="Changes" comment="확인" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/pleasee">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="origin/master" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Yang-jun-yeong&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/2024-AISCHOOL-WEB2B/bamboo.git&quot;,
+    &quot;accountId&quot;: &quot;7e537f4c-d73a-4bd7-a1ce-8e357b2d50b4&quot;
+  }
+}</component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2opRDeWBgh9bAFUv72J6fFIXMUs" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "FileHistory.git4idea.history.GitHistoryProvider_flatOrder0": "0",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatOrder1": "1",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatOrder2": "2",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatOrder3": "3",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatWidth0": "447",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatWidth1": "447",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatWidth2": "448",
+    "FileHistory.git4idea.history.GitHistoryProvider_flatWidth3": "447",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeOrder0": "0",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeOrder1": "1",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeOrder2": "2",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeOrder3": "3",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeWidth0": "447",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeWidth1": "447",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeWidth2": "448",
+    "FileHistory.git4idea.history.GitHistoryProvider_treeWidth3": "447",
+    "Gradle.pleasee [:org.example.please.PleaseApplication.main()].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/chxss/OneDrive/Desktop/AiSchool/project/bamboo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "ts.external.directory.path": "C:\\Users\\jin\\Desktop\\bambooo\\my-app\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="애플리케이션.PleaseApplication">
+    <configuration name="PleaseApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.please.PleaseApplication" />
+      <module name="pleasee.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.please.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PleaseApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="pleasee.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.please.PleaseApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="21daf45c-5552-4b18-811d-5d638d248ea1" name="Changes" comment="" />
+      <created>1731564416471</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731564416471</updated>
+      <workItem from="1731585613554" duration="4287000" />
+      <workItem from="1731631569810" duration="13637000" />
+      <workItem from="1731913277524" duration="172000" />
+      <workItem from="1731913458430" duration="6005000" />
+    </task>
+    <task id="LOCAL-00001" summary="일기페이지 동기화맨">
+      <option name="closed" value="true" />
+      <created>1731587868400</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731587868400</updated>
+    </task>
+    <task id="LOCAL-00002" summary="일기페이지 동기화맨">
+      <option name="closed" value="true" />
+      <created>1731645584007</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731645584007</updated>
+    </task>
+    <task id="LOCAL-00003" summary="챗봇 평가버튼, 시간, 날짜 입력대기 수정 , 업데이트">
+      <option name="closed" value="true" />
+      <created>1731911795493</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731911795493</updated>
+    </task>
+    <task id="LOCAL-00004" summary="zz">
+      <option name="closed" value="true" />
+      <created>1731913352842</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731913352842</updated>
+    </task>
+    <task id="LOCAL-00005" summary="회원가입 수정, 로그인 됨">
+      <option name="closed" value="true" />
+      <created>1731915773808</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731915773808</updated>
+    </task>
+    <task id="LOCAL-00006" summary="로그아웃시 inactive">
+      <option name="closed" value="true" />
+      <created>1731917386824</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731917386824</updated>
+    </task>
+    <task id="LOCAL-00007" summary="오류수정중">
+      <option name="closed" value="true" />
+      <created>1732012291524</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732012291524</updated>
+    </task>
+    <task id="LOCAL-00008" summary="month view 오류 발견">
+      <option name="closed" value="true" />
+      <created>1732074472990</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1732074472990</updated>
+    </task>
+    <task id="LOCAL-00009" summary="month view 오류 해결">
+      <option name="closed" value="true" />
+      <created>1732082033578</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1732082033578</updated>
+    </task>
+    <task id="LOCAL-00010" summary="이동">
+      <option name="closed" value="true" />
+      <created>1736515854782</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1736515854782</updated>
+    </task>
+    <task id="LOCAL-00011" summary="이동">
+      <option name="closed" value="true" />
+      <created>1736516131433</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1736516131433</updated>
+    </task>
+    <task id="LOCAL-00012" summary="확인">
+      <option name="closed" value="true" />
+      <created>1736516355059</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1736516355059</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="일기페이지 동기화맨" />
+    <MESSAGE value="챗봇 평가버튼, 시간, 날짜 입력대기 수정 , 업데이트" />
+    <MESSAGE value="zz" />
+    <MESSAGE value="회원가입 수정, 로그인 됨" />
+    <MESSAGE value="로그아웃시 inactive" />
+    <MESSAGE value="민감정보 지웠음" />
+    <MESSAGE value="오류수정중" />
+    <MESSAGE value="month view 오류 발견" />
+    <MESSAGE value="month view 오류 해결" />
+    <MESSAGE value="이동" />
+    <MESSAGE value="확인" />
+    <option name="LAST_COMMIT_MESSAGE" value="확인" />
+  </component>
+</project>
