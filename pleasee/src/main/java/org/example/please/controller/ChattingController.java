@@ -1,4 +1,3 @@
-// ChatController.java
 package org.example.please.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,26 +27,59 @@ public class ChattingController {
     private EntityManager entityManager; // EntityManager 주입
 
     @Autowired
-    private RestTemplate restTemplate;
+    private RestTemplate restTemplate; // RestTemplate을 통해 FastAPI 서버와 통신
 
     @Autowired
-    private ChattingService chattingService;
+    private ChattingService chattingService; // 채팅 서비스 주입
 
     @Autowired
-    private ChattingRepository chattingRepository;
+    private ChattingRepository chattingRepository; // 채팅 데이터베이스 처리
 
+    // FastAPI 서버에서 Ngrok URL을 가져오는 메서드
+    @GetMapping("/getNgrokUrl")
+    public ResponseEntity<String> getNgrokUrl() {
+        String ngrokUrl = "";
+        try {
+            // FastAPI 서버의 /server_url 엔드포인트 호출
+            String fastApiServerUrl = "http://localhost:8001/server_url";  // 실제 FastAPI 서버 주소
+            ResponseEntity<Map> response = restTemplate.exchange(fastApiServerUrl, HttpMethod.GET, null, Map.class);
+
+            // 응답에서 'server_url' -> 'public_url' 값을 추출하여 ngrokUrl 변수에 할당
+            if (response.getBody() != null) {
+                Map<String, Object> serverUrlData = (Map<String, Object>) response.getBody().get("server_url");
+                if (serverUrlData != null) {
+                    ngrokUrl = (String) serverUrlData.get("public_url");  // "public_url" 값을 가져옵니다.
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving Ngrok URL.");
+        }
+        return ResponseEntity.ok(ngrokUrl); // Ngrok URL을 반환
+    }
+
+    // 사용자 메시지를 FastAPI 서버로 전달하여 봇의 응답을 받는 메서드
     public Map<String, Object> sendUserMessage(String userEmail, int croomIdx, int sessionIdx, String chatContent) {
         Map<String, Object> response = new HashMap<>();
 
-
-        String url = "https://ef5e-112-121-238-29.ngrok-free.app/predict";
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
         try {
+            // FastAPI 서버에서 Ngrok URL을 받아옵니다.
+            ResponseEntity<String> ngrokResponse = getNgrokUrl();
+            String ngrokUrl = ngrokResponse.getBody(); // ResponseEntity에서 body 값을 가져옵니다.
+
+            if (ngrokUrl == null) {
+                throw new Exception("Ngrok URL을 가져오지 못했습니다.");
+            }
+
+            // FastAPI 서버의 /predict 엔드포인트로 요청을 보냄
+            String url = ngrokUrl + "/predict"; // 예시 URL
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON); // 요청 헤더 설정
+
             Map<String, Object> requestPayload = new HashMap<>();
-            // 필요한 데이터 준비
             String firstUserMessage = chattingService.getFirstUserMessageInSession(croomIdx, sessionIdx);
             String previousMessage = chattingService.getLatestMessageInRoom(croomIdx, sessionIdx);
+
             // 기본값 설정
             if (firstUserMessage == null) {
                 firstUserMessage = "[NO_FIRST]";
@@ -55,6 +87,7 @@ public class ChattingController {
             if (previousMessage == null) {
                 previousMessage = "[NO_PREV]";
             }
+
             // 요청에 필요한 데이터 구성
             requestPayload.put("user_email", userEmail);
             requestPayload.put("croom_idx", croomIdx);
@@ -62,16 +95,17 @@ public class ChattingController {
             requestPayload.put("first_user_message", firstUserMessage);
             requestPayload.put("previous_message", previousMessage);
             requestPayload.put("current_user_message", chatContent);
+
             // ngrok로 요청 보내기 전에 요청 데이터 확인 (디버깅용 로그)
             System.out.println("Request Payload: " + requestPayload);
 
-            // ngrok로 요청 보내기
+            // ngrok로 POST 요청 보내기
             HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(requestPayload, headers);
-            ResponseEntity<Map> ngrokResponse = restTemplate.postForEntity(url, requestEntity, Map.class);
+            ResponseEntity<Map> ngrokApiResponse = restTemplate.postForEntity(url, requestEntity, Map.class);
 
             // ngrok에서 받은 응답을 처리
-            if (ngrokResponse.getBody() != null) {
-                response = ngrokResponse.getBody();
+            if (ngrokApiResponse.getBody() != null) {
+                response = ngrokApiResponse.getBody();
             }
 
         } catch (Exception e) {
@@ -83,6 +117,7 @@ public class ChattingController {
     }
 
 
+    // 채팅 응답을 처리하는 API 엔드포인트
     @Transactional
     @PostMapping("/getChatResponse")
     public ResponseEntity<Map<String, Object>> getChatResponse(@RequestBody Chatting chatting) {
@@ -94,6 +129,7 @@ public class ChattingController {
                 LocalDateTime latestCreatedAt = latestChatting.getCreatedAt().toLocalDateTime();
                 chatting.setSessionIdx(latestChatting.getSessionIdx());
 
+                // 30분 이상 지난 경우 세션 번호 증가
                 if (Duration.between(latestCreatedAt, now).toMinutes() > 30) {
                     chatting.setSessionIdx(latestChatting.getSessionIdx() + 1);
                 }
@@ -101,45 +137,41 @@ public class ChattingController {
                 chatting.setSessionIdx(1);
             }
             ObjectMapper mapper = new ObjectMapper();
-            //            모델한테 보내고 답받기
+
+            // 모델에 요청을 보내고 응답 받기
             Map<String, Object> botResponseToUser = sendUserMessage(chatting.getUserEmail(), chatting.getCroomIdx(), chatting.getSessionIdx(), chatting.getChatContent());
 
             if (botResponseToUser.get("bot_response") == null) {
                 System.out.println("botResponseToUser is null. No messages will be saved.");
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
             }
-            String userEmotionTag = mapper.writeValueAsString(botResponseToUser.get("current_emotion_probabilities"));
-//            chatting.setEmotionTag(userEmotionTag);
 
-            String botContent = null;
+            // 감정 태그 저장
+            String userEmotionTag = mapper.writeValueAsString(botResponseToUser.get("current_emotion_probabilities"));
+
             String botResponseObject = (String) botResponseToUser.get("bot_response");
             String emotionKeyword = (String) botResponseToUser.get("emotion_keyword");
-//            if (botResponseObject instanceof Map) {
-//                Map<String, Object> botResponseMap = (Map<String, Object>) botResponseObject;
-//                botContent = (String) botResponseMap.get("content");
-//            }
 
-            System.out.println("Bot Content: " + botResponseObject);
             // 사용자 메시지 저장
-
             if ("user".equals(chatting.getChatter())) {
                 chattingService.saveChatbotDialogue(chatting);
                 entityManager.flush();
                 entityManager.clear();
-                System.out.println("userChatIdxxxx"+chattingService.saveChatbotDialogue(chatting));
+                System.out.println("userChatIdxxxx" + chattingService.saveChatbotDialogue(chatting));
             }
 
-            // 봇 응답  저장
+            // 봇 응답 저장
             String botEmotionTag = mapper.writeValueAsString(botResponseToUser.get("current_emotion_probabilities"));
 
-            Chatting botResponse = saveBotMessage(chatting.getCroomIdx(), chatting.getSessionIdx(), botResponseObject , botEmotionTag, emotionKeyword);
+            // 봇의 응답 저장
+            Chatting botResponse = saveBotMessage(chatting.getCroomIdx(), chatting.getSessionIdx(), botResponseObject, botEmotionTag, emotionKeyword);
+
             // 응답 데이터 생성
             Map<String, Object> response = new HashMap<>();
             response.put("chatContent", botResponse.getChatContent());
             response.put("chatIdx", botResponse.getChatIdx()); // 저장된 chatIdx 반환
             response.put("evaluation", botResponse.getEvaluation());
             response.put("sessionIdx", botResponse.getSessionIdx());
-
 
             System.out.println("Returning chatIdx: " + botResponse.getChatIdx()); // 디버그 로그
             return ResponseEntity.ok(response);
@@ -151,6 +183,7 @@ public class ChattingController {
         }
     }
 
+    // 봇 메시지 저장
     private Chatting saveBotMessage(int croomIdx, int sessionIdx, String content, String emotionTag, String emotionKeyword) {
         Chatting botMessage = new Chatting();
         botMessage.setCroomIdx(croomIdx);
@@ -167,6 +200,7 @@ public class ChattingController {
                 .orElseThrow(() -> new RuntimeException("Failed to retrieve saved bot message"));
     }
 
+    // 채팅방 생성 API 엔드포인트
     @PostMapping("/create_room")
     public ResponseEntity<Map<String, Object>> createRoom(@RequestBody Chatbot chatbot) {
         Map<String, Object> response = new HashMap<>();
@@ -174,12 +208,14 @@ public class ChattingController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    // 채팅 기록 조회 API 엔드포인트
     @GetMapping("/getChatHistory")
-    public ResponseEntity<List<Chatting>> getChatHisotry(@RequestParam Integer croomIdx) {
-        // 특정 방 ID의 채팅 기록을 가져옴
+    public ResponseEntity<List<Chatting>> getChatHistory(@RequestParam Integer croomIdx) {
         List<Chatting> chatHistory = chattingService.getChatHistory(croomIdx);
         return ResponseEntity.ok(chatHistory);
     }
+
+    // 평가 업데이트 API 엔드포인트
     @PutMapping("/updateEvaluation")
     public ResponseEntity<String> updateEvaluation(@RequestBody Chatting chatting) {
         int rowsUpdated = chattingService.updateEvaluation(chatting.getChatIdx(), chatting.getEvaluation());
@@ -190,7 +226,7 @@ public class ChattingController {
         }
     }
 
-    // 메시지 삭제 엔드포인트 추가
+    // 메시지 삭제 API 엔드포인트
     @DeleteMapping("/deleteMessage")
     public ResponseEntity<String> deleteMessage(@RequestParam Integer chatIdx) {
         boolean isDeleted = chattingService.deleteChatMessage(chatIdx);
@@ -201,11 +237,12 @@ public class ChattingController {
         }
     }
 
+    // 사용자 상태 업데이트 API 엔드포인트
     @PostMapping("/updateUserStatus")
     public ResponseEntity<String> updateUserStatus(@RequestBody Map<String, String> payload) {
         String userEmail = payload.get("userEmail");
         String status = payload.get("status");
-        System.out.println("status: " + status+"userEmail"+userEmail);
+        System.out.println("status: " + status + " userEmail: " + userEmail);
 
         try {
             chattingService.updateCroomStatus(userEmail, status);
@@ -215,6 +252,4 @@ public class ChattingController {
                     .body("Error updating user status: " + e.getMessage());
         }
     }
-
 }
-

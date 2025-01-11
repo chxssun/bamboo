@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="21daf45c-5552-4b18-811d-5d638d248ea1" name="Changes" comment="npm install">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/components/Config.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/components/Config.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/controller/ChattingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/pleasee/src/main/java/org/example/please/controller/ChattingController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,12 +44,12 @@
     &quot;assignee&quot;: &quot;Yang-jun-yeong&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/chxssun/bamboo.git",
-    "accountId": "5efd987d-444d-45cc-a67a-6ec51a458817"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/chxssun/bamboo.git&quot;,
+    &quot;accountId&quot;: &quot;5efd987d-444d-45cc-a67a-6ec51a458817&quot;
   }
-}]]></component>
+}</component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
@@ -256,7 +256,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736582675527</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="npm install">
+      <option name="closed" value="true" />
+      <created>1736586190089</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1736586190089</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
