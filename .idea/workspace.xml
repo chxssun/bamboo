@@ -4,21 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21daf45c-5552-4b18-811d-5d638d248ea1" name="Changes" comment="확인">
+    <list default="true" id="21daf45c-5552-4b18-811d-5d638d248ea1" name="Changes" comment="npm install">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/CoepCoopSandboxedIframeCannotNavigateToCoopPage.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/CoepCorpNotSameOriginAfterDefaultedToSameOriginByCoep.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/federatedAuthRequestClientMetadataHttpNotFound.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/federatedAuthRequestClientMetadataInvalidResponse.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/federatedAuthUserInfoRequestInvalidAccountsResponse.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/federatedAuthUserInfoRequestInvalidConfigOrWellKnown.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/federatedAuthUserInfoRequestNoAccountSharingPermission.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/federatedAuthUserInfoRequestNoReturningUserFromFetchedAccounts.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/federatedAuthUserInfoRequestNotPotentiallyTrustworthy.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/federatedAuthUserInfoRequestNotSignedInWithIdp.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/genericFormEmptyIdAndNameAttributesForInputError.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/genericFormInputAssignedAutocompleteValueToIdOrNameAttributeError.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/@react-native/community-cli-plugin/node_modules/@react-native/debugger-frontend/dist/third-party/front_end/models/issues_manager/descriptions/genericFormInputHasWrongButWellIntendedAutocompleteValueError.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,12 +44,12 @@
     &quot;assignee&quot;: &quot;Yang-jun-yeong&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/2024-AISCHOOL-WEB2B/bamboo.git&quot;,
-    &quot;accountId&quot;: &quot;7e537f4c-d73a-4bd7-a1ce-8e357b2d50b4&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/chxssun/bamboo.git",
+    "accountId": "5efd987d-444d-45cc-a67a-6ec51a458817"
   }
-}</component>
+}]]></component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
@@ -250,7 +240,23 @@
       <option name="project" value="LOCAL" />
       <updated>1736582286130</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="npm install">
+      <option name="closed" value="true" />
+      <created>1736582662931</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1736582662931</updated>
+    </task>
+    <task id="LOCAL-00015" summary="npm install">
+      <option name="closed" value="true" />
+      <created>1736582675527</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1736582675527</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,6 +285,7 @@
     <MESSAGE value="month view 오류 해결" />
     <MESSAGE value="이동" />
     <MESSAGE value="확인" />
-    <option name="LAST_COMMIT_MESSAGE" value="확인" />
+    <MESSAGE value="npm install" />
+    <option name="LAST_COMMIT_MESSAGE" value="npm install" />
   </component>
 </project>
