@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
     View,
     Text,
@@ -12,22 +12,22 @@ import {
     Alert,
     useWindowDimensions,
     Keyboard,
-    Animated
+    Animated,
 } from 'react-native';
 import axios from 'axios';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {getUserInfo, getUserProfileImage} from '../../storage/storageHelper';
-import {useFocusEffect} from '@react-navigation/native';
+import { getUserInfo, getUserProfileImage } from '../../storage/storageHelper';
+import { useFocusEffect } from '@react-navigation/native';
 import BambooHead from '../../assets/images/밤부_머리1.png';
 import BambooPanda from '../../assets/images/bamboo_panda.png';
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {serverAddress} from '../../components/Config';
-import {ChatMessage, getChatHistory} from "../../components/getChatHistory";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { serverAddress } from '../../components/Config';
+import { ChatMessage, getChatHistory } from '../../components/getChatHistory';
 import * as Clipboard from 'expo-clipboard';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'; // KeyboardAwareScrollView 임포트
-import {useRoute} from '@react-navigation/native';
-import {useProfile} from '../../context/ProfileContext';
-import {ThemedText} from "@/components/ThemedText";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; // KeyboardAwareScrollView 임포트
+import { useRoute } from '@react-navigation/native';
+import { useProfile } from '../../context/ProfileContext';
+import { ThemedText } from '@/components/ThemedText';
 
 // 메시지 구조를 정의하는 인터페이스
 interface Message {
@@ -43,7 +43,7 @@ interface Message {
 }
 
 // 요일 배열
-const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 
 // 현재 날짜와 요일을 가져오는 함수
 const getCurrentDate = () => {
@@ -55,9 +55,8 @@ const getCurrentDate = () => {
     return `${year}-${month}-${day} ${dayOfWeek}`;
 };
 
-
 export default function ChatbotPage() {
-    const {width, height} = useWindowDimensions();
+    const { width, height } = useWindowDimensions();
     const [currentDate, setCurrentDate] = useState<string>(getCurrentDate());
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
@@ -76,7 +75,7 @@ export default function ChatbotPage() {
     // 이전 이미지 URI를 저장하는 useRef 생성
     const prevImageUriRef = useRef<string | null>(null); // 이전 이미지 URI를 저장하는 useRef
     const [isAutoScrollEnabled, setIsAutoScrollEnabled] = useState(true);
-    const {profileImageUri} = useProfile();
+    const { profileImageUri } = useProfile();
     const dotOpacity1 = useRef(new Animated.Value(0)).current;
     const dotOpacity2 = useRef(new Animated.Value(0)).current;
     const dotOpacity3 = useRef(new Animated.Value(0)).current;
@@ -354,7 +353,6 @@ export default function ChatbotPage() {
                 }));
 
                 setMessages(updateTimestamps(formattedMessages));
-s
             } catch (error) {
                 // console.error("Failed to load chat history:", error);
             }
@@ -630,10 +628,7 @@ s
                 (msg.sender === 'bot' && (index === 0 || messages[index - 1]?.sender !== 'bot')) ||
                 (msg.sender === 'user' && (index === 0 || messages[index - 1]?.sender !== 'user'));
             // 사용자의 마지막 메시지 이후 챗봇의 첫 번째 메시지인지 확인
-            const isFirstResponseFromBot =
-                msg.sender === 'bot' &&
-                index > 0 &&
-                messages[index - 1]?.sender === 'user';
+            const isFirstResponseFromBot = msg.sender === 'bot' && index > 0 && messages[index - 1]?.sender === 'user';
             return (
                 <React.Fragment key={index}>
                     {showDateHeader && (
@@ -661,15 +656,19 @@ s
                             </View>
                         )}
 
-                        <View style={[
-                            styles.messageContent,
-                            msg.sender === 'user' ? styles.userMessageContent : styles.botMessageContent,
-                        ]}>
+                        <View
+                            style={[
+                                styles.messageContent,
+                                msg.sender === 'user' ? styles.userMessageContent : styles.botMessageContent,
+                            ]}
+                        >
                             {isFirstMessage && (
-                                <Text style={[
-                                    styles.senderName,
-                                    msg.sender === 'user' ? styles.userSenderName : styles.botSenderName,
-                                ]}>
+                                <Text
+                                    style={[
+                                        styles.senderName,
+                                        msg.sender === 'user' ? styles.userSenderName : styles.botSenderName,
+                                    ]}
+                                >
                                     {msg.name}
                                 </Text>
                             )}
@@ -679,16 +678,20 @@ s
                                     <Text style={styles.timeText}>{msg.timestamp}</Text>
                                 )}
 
-                                <View style={[
-                                    styles.message,
-                                    msg.sender === 'user' ? styles.userMessage : styles.botMessage,
-                                    !isFirstMessage && msg.sender === 'bot' ? styles.botMessageNotFirst : {},
-                                    !isFirstMessage && msg.sender === 'user' ? styles.userMessageNotFirst : {},
-                                ]}>
-                                    <Text style={[
-                                        styles.messageText,
-                                        msg.sender === 'user' ? styles.userMessageText : styles.botMessageText,
-                                    ]}>
+                                <View
+                                    style={[
+                                        styles.message,
+                                        msg.sender === 'user' ? styles.userMessage : styles.botMessage,
+                                        !isFirstMessage && msg.sender === 'bot' ? styles.botMessageNotFirst : {},
+                                        !isFirstMessage && msg.sender === 'user' ? styles.userMessageNotFirst : {},
+                                    ]}
+                                >
+                                    <Text
+                                        style={[
+                                            styles.messageText,
+                                            msg.sender === 'user' ? styles.userMessageText : styles.botMessageText,
+                                        ]}
+                                    >
                                         {msg.text}
                                     </Text>
                                 </View>
@@ -866,7 +869,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row', // 시간과 메시지를 가로로 정렬
         alignItems: 'flex-end', // 메시지를 수직으로 아래 정렬
         gap: 0, // 요소 간 간격 설정
-        marginTop: -3, // 이름과의 간격을 좁히기 위해 위치를 위로 조정
+        marginTop: -2, // 이름과의 간격을 좁히기 위해 위치를 위로 조정
     },
 
     // 메시지 시간 텍스트 스타일
@@ -875,7 +878,7 @@ const styles = StyleSheet.create({
         color: '#999', // 텍스트 색상
         marginTop: 2, // 평가 버튼과의 간격
         left: -5,
-        top: 8,
+        top: 7, // 시간 위치 조정
     },
 
     // 메시지의 기본 스타일
@@ -899,7 +902,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#4a9960', // 사용자 메시지 배경색
         marginLeft: 5, // 말풍선 꼬리 공간 확보
         borderTopRightRadius: 3, // 오른쪽 상단 모서리를 더 둥글게
-        top: 5,
+        top: 5, // 위치 미세 조정
         left: -8,
     },
 
@@ -921,35 +924,37 @@ const styles = StyleSheet.create({
 
     // 메시지 컨테이너 스타일
     messageContainer: {
-        flexDirection: 'row', // 메시지와 아바타를 가로로 정렬
-        alignItems: 'flex-start', // 수직으로 위쪽 정렬
-        marginVertical: 2, // 위아래 여백
-        marginBottom: 4, // 메시지 간격
-        paddingHorizontal: 6, // 좌우 여백
-        position: 'relative', // 자식 요소의 위치 설정
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginVertical: 1,
+        paddingHorizontal: 6,
+        position: 'relative',
     },
 
     // 사용자 메시지 컨테이너 스타일
     userMessageContainer: {
-        flexDirection: 'row-reverse', // 사용자 메시지를 오른쪽으로 정렬
+        flexDirection: 'row-reverse',
         justifyContent: 'flex-start',
         marginRight: -15,
+        marginTop: 2, // 상단 간격 추가
+        marginBottom: 2, // 하단 간격 추가
     },
     // 봇 메시지 컨테이너 스타일
     botMessageContainer: {
-        flexDirection: 'row', // 챗봇 메시지를 왼쪽으로 정렬
+        flexDirection: 'row',
         justifyContent: 'flex-start',
         marginLeft: -15,
     },
 
     // 아바타 컨테이너 스타일
     avatarContainer: {
-        width: 36, // 아바타 너비
-        height: 36, // 아바타 높이
-        borderRadius: 18, // 원형 모양
-        overflow: 'hidden', // 넘치는 부분을 숨김
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        overflow: 'hidden',
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: 2,
     },
 
     // 사용자 아바타 이미지 스타일
@@ -973,19 +978,21 @@ const styles = StyleSheet.create({
 
     // 메시지 컨텐츠 스타일
     messageContent: {
-        maxWidth: '70%', // 메시지 최대 너비
-        marginHorizontal: -3, // 좌우 마진
-        position: 'relative', // 자식 요소의 위치 설정
+        maxWidth: '70%',
+        marginHorizontal: -3,
+        position: 'relative',
+        marginVertical: 2, // 상하 여백 추가
     },
 
     // 사용자 메시지 컨텐츠 정렬 스타일
     userMessageContent: {
-        alignItems: 'flex-end', // 오른쪽 정렬
+        alignItems: 'flex-end',
+        marginTop: -2,
     },
 
     // 봇 메시지 컨텐츠 정렬 스타일
     botMessageContent: {
-        alignItems: 'flex-start', // 왼쪽 정렬
+        alignItems: 'flex-start',
         marginLeft: 5,
     },
 
@@ -1006,11 +1013,12 @@ const styles = StyleSheet.create({
 
     // 발신자 이름 텍스트 스타일
     senderName: {
-        fontSize: 12, // 텍스트 크기
-        fontWeight: 'bold', // 텍스트 두껍게
-        color: '#555', // 텍스트 색상
-        paddingLeft: 5, // 말풍선 꼬리 공간 확보
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#555',
+        paddingLeft: 5,
         left: -5,
+        marginBottom: 2,
     },
 
     // 봇 발신자 이름 정렬 스타일
@@ -1020,7 +1028,7 @@ const styles = StyleSheet.create({
 
     // 사용자 발신자 이름 정렬 스타일
     userSenderName: {
-        top: 1.2,
+        top: 2,
         left: -8,
     },
 
