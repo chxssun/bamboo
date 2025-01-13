@@ -64,7 +64,7 @@ export default function ChatbotPage() {
     const [userNick, setUserNick] = useState<string>('');
     const [chatbotName, setChatbotName] = useState<string>('');
     const { chatbotLevel, setChatbotLevel } = useProfile();
-    const [userAvatar, setUserAvatar] = useState(profileImageUri || BambooPanda);
+    const [userAvatar, setUserAvatar] = useState<any>(BambooPanda);
     const [userEmail, setUserEmail] = useState<string>('');
     const [isTyping, setIsTyping] = useState(false);
     const scrollViewRef = useRef<ScrollView>(null);
@@ -247,46 +247,44 @@ export default function ChatbotPage() {
     }, [currentDate]);
 
     useEffect(() => {
-        setUserAvatar(profileImageUri ? { uri: profileImageUri } : BambooPanda);
-        // console.log('프로필 이미지 URI가 변경됨:', profileImageUri || '기본 이미지(BambooPanda)');
-    }, [profileImageUri]);
+        const loadProfileImage = async () => {
+            try {
+                const storedImage = await getUserProfileImage();
+                if (storedImage) {
+                    setUserAvatar({ uri: storedImage });
+                } else {
+                    setUserAvatar(BambooPanda);
+                }
+            } catch (error) {
+                console.error('프로필 이미지 로드 실패:', error);
+                setUserAvatar(BambooPanda);
+            }
+        };
+
+        loadProfileImage();
+    }, [profileImageUri]); // profileImageUri가 변경될 때마다 실행
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const userData = await getUserInfo(); // 사용자 정보를 서버에서 가져오기
+                const userData = await getUserInfo();
                 if (userData) {
                     setUserNick(userData.userNick || '');
                     setChatbotName(userData.chatbotName || '챗봇');
                     setUserEmail(userData.userEmail);
 
-                    let profileImageUrl = userData.profileImage;
-
-                    if (profileImageUrl) {
-                        // URL이 상대 경로라면 서버 주소를 추가
-                        if (!profileImageUrl.startsWith('http')) {
-                            profileImageUrl = `${serverAddress}/uploads/profile/images/${profileImageUrl}`;
-                        }
+                    // 프로필 이미지 처리
+                    if (userData.profileImage) {
+                        setUserAvatar({ uri: userData.profileImage });
                     } else {
-                        // URL이 없으면 기본 이미지로 설정
-                        profileImageUrl = null;
+                        setUserAvatar(BambooPanda);
                     }
-
-                    // AsyncStorage에 저장
-                    await AsyncStorage.setItem(
-                        'profileImageUri',
-                        profileImageUrl || '' // null이면 빈 문자열로 저장
-                    );
-
-                    // 프로필 이미지 상태 설정
-                    setUserAvatar(profileImageUrl ? { uri: profileImageUrl } : BambooPanda);
                 } else {
-                    // 서버에서 사용자 정보를 가져올 수 없는 경우 기본 이미지 사용
                     setUserAvatar(BambooPanda);
                 }
             } catch (error) {
                 console.error('프로필 정보 로드 중 오류:', error);
-                setUserAvatar(BambooPanda); // 오류 발생 시 기본 이미지 사용
+                setUserAvatar(BambooPanda);
             }
         };
 
@@ -296,20 +294,20 @@ export default function ChatbotPage() {
     useFocusEffect(
         React.useCallback(() => {
             const fetchProfileImage = async () => {
-                const storedImageUri = await AsyncStorage.getItem('profileImageUri');
-
-                // URL이 없으면 기본 이미지 사용
-                const imageUri = storedImageUri || BambooPanda;
-
-                setUserAvatar(imageUri ? { uri: imageUri } : BambooPanda);
+                try {
+                    const storedImage = await getUserProfileImage();
+                    if (storedImage) {
+                        setUserAvatar({ uri: storedImage });
+                    } else {
+                        setUserAvatar(BambooPanda);
+                    }
+                } catch (error) {
+                    console.error('프로필 이미지 로드 실패:', error);
+                    setUserAvatar(BambooPanda);
+                }
             };
 
             fetchProfileImage();
-
-            // 포커스될 때마다 스크롤을 맨 아래로 이동
-            if (scrollViewRef.current) {
-                scrollViewRef.current.scrollToEnd({ animated: true });
-            }
         }, [])
     );
 

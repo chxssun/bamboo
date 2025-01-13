@@ -41,12 +41,21 @@ export const ProfileProvider: React.FC = ({ children }) => {
     // 프로필 이미지와 챗봇 레벨 로드
     useEffect(() => {
         const loadProfileData = async () => {
-            console.log("[ProfileContext] Starting to load profile data...");
             try {
                 const userInfoString = await AsyncStorage.getItem(ASYNC_STORAGE_KEYS.USER_INFO);
                 if (userInfoString) {
                     const userInfo: User = JSON.parse(userInfoString);
                     setUserData(userInfo);
+
+                    // 프로필 이미지 로드 순서 변경
+                    if (userInfo.profileImage) {
+                        setProfileImageUri(userInfo.profileImage);
+                    } else {
+                        const savedProfileImage = await AsyncStorage.getItem(ASYNC_STORAGE_KEYS.PROFILE_IMAGE_URI);
+                        if (savedProfileImage) {
+                            setProfileImageUri(savedProfileImage);
+                        }
+                    }
 
                     // 챗봇 레벨 로드
                     const savedLevel = await AsyncStorage.getItem(ASYNC_STORAGE_KEYS.CHATBOT_LEVEL);
@@ -55,19 +64,9 @@ export const ProfileProvider: React.FC = ({ children }) => {
                     } else {
                         setChatbotLevelState(userInfo.chatbotLevel);
                     }
-
-                    // 프로필 이미지 로드
-                    const savedProfileImage = await AsyncStorage.getItem(ASYNC_STORAGE_KEYS.PROFILE_IMAGE_URI);
-                    if (savedProfileImage) {
-                        setProfileImageUri(savedProfileImage);
-                        console.log("[ProfileContext] Loaded profile image URI from AsyncStorage:", savedProfileImage);
-                    } else if (userInfo.profileImage) {
-                        setProfileImageUri(userInfo.profileImage);
-                        console.log("[ProfileContext] Loaded profile image from userInfo:", userInfo.profileImage);
-                    }
                 }
             } catch (error) {
-                console.error("[ProfileContext] Error loading profile data:", error);
+                console.error('[ProfileContext] Error loading profile data:', error);
             }
         };
 
@@ -76,8 +75,17 @@ export const ProfileProvider: React.FC = ({ children }) => {
 
     // 프로필 이미지 업데이트
     const updateProfileImageUri = async (uri: string | null) => {
-        console.log("[ProfileContext] Updating profileImageUri to:", uri);
         try {
+            // 먼저 userInfo 업데이트
+            const userInfoString = await AsyncStorage.getItem(ASYNC_STORAGE_KEYS.USER_INFO);
+            if (userInfoString) {
+                const currentUserInfo = JSON.parse(userInfoString);
+                const updatedUserInfo = { ...currentUserInfo, profileImage: uri };
+                await AsyncStorage.setItem(ASYNC_STORAGE_KEYS.USER_INFO, JSON.stringify(updatedUserInfo));
+                setUserData(updatedUserInfo);
+            }
+
+            // 그 다음 profileImageUri 업데이트
             if (uri) {
                 await AsyncStorage.setItem(ASYNC_STORAGE_KEYS.PROFILE_IMAGE_URI, uri);
             } else {
@@ -85,13 +93,13 @@ export const ProfileProvider: React.FC = ({ children }) => {
             }
             setProfileImageUri(uri);
         } catch (error) {
-            console.error("[ProfileContext] Error updating profile image URI:", error);
+            console.error('[ProfileContext] Error updating profile image URI:', error);
         }
     };
 
     // 챗봇 레벨 업데이트
     const setChatbotLevel = async (level: number) => {
-        console.log("[ProfileContext] Setting chatbotLevel to:", level);
+        console.log('[ProfileContext] Setting chatbotLevel to:', level);
         try {
             // AsyncStorage에 챗봇 레벨 저장
             await AsyncStorage.setItem(ASYNC_STORAGE_KEYS.CHATBOT_LEVEL, level.toString());
@@ -101,13 +109,13 @@ export const ProfileProvider: React.FC = ({ children }) => {
                 const updatedUserData = { ...userData, chatbotLevel: level };
                 setUserData(updatedUserData);
                 await AsyncStorage.setItem(ASYNC_STORAGE_KEYS.USER_INFO, JSON.stringify(updatedUserData));
-                console.log("[ProfileContext] Updated userData:", updatedUserData);
+                console.log('[ProfileContext] Updated userData:', updatedUserData);
             }
 
             // 상태 업데이트
             setChatbotLevelState(level);
         } catch (error) {
-            console.error("[ProfileContext] Error setting chatbotLevel:", error);
+            console.error('[ProfileContext] Error setting chatbotLevel:', error);
         }
     };
 
@@ -128,7 +136,7 @@ export const ProfileProvider: React.FC = ({ children }) => {
 export const useProfile = () => {
     const context = useContext(ProfileContext);
     if (!context) {
-        throw new Error("useProfile must be used within a ProfileProvider");
+        throw new Error('useProfile must be used within a ProfileProvider');
     }
     return context;
 };
