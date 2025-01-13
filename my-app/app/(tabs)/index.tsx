@@ -86,7 +86,6 @@ export default function ChatbotPage() {
     const messagesToSendRef = useRef<string[]>([]);
     const countdownIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-
     useEffect(() => {
         if (isTyping) {
             // 점 애니메이션 반복
@@ -132,40 +131,36 @@ export default function ChatbotPage() {
         }
     }, [isTyping, dotOpacity1, dotOpacity2, dotOpacity3]);
 
-
     const handleLongPress = (message, messageIndex) => {
         Alert.alert(
-            "메시지 옵션",
-            "이 메시지를 어떻게 할까요?",
+            '메시지 옵션',
+            '이 메시지를 어떻게 할까요?',
             [
                 {
-                    text: "복사",
+                    text: '복사',
                     onPress: async () => {
                         await Clipboard.setStringAsync(message.text); // 클립보드에 메시지 텍스트 복사
-                        Alert.alert("복사됨", "메시지가 복사되었습니다.");
-                    }
+                        Alert.alert('복사됨', '메시지가 복사되었습니다.');
+                    },
                 },
                 {
-                    text: "삭제",
-                    onPress: () => deleteMessage(message.chatIdx) // 메시지 삭제 함수 호출
+                    text: '삭제',
+                    onPress: () => deleteMessage(message.chatIdx), // 메시지 삭제 함수 호출
                 },
                 {
-                    text: "취소",
-                    style: "cancel"
-                }
+                    text: '취소',
+                    style: 'cancel',
+                },
             ],
-            {cancelable: true}
+            { cancelable: true }
         );
     };
-
 
     const deleteMessage = async (chatIdx) => {
         try {
             if (!chatIdx) {
                 // 클립보드에서 복사한 메시지를 즉시 삭제하려면 로컬 상태만 업데이트
-                setMessages((prevMessages) =>
-                    prevMessages.filter((message) => message.chatIdx !== chatIdx)
-                );
+                setMessages((prevMessages) => prevMessages.filter((message) => message.chatIdx !== chatIdx));
                 return;
             }
 
@@ -174,18 +169,14 @@ export default function ChatbotPage() {
                 params: { chatIdx },
             });
 
-            console.log("Message deleted successfully:", response.data);
+            console.log('Message deleted successfully:', response.data);
 
             // 서버에서 삭제된 메시지를 화면에서도 제거
-            setMessages((prevMessages) =>
-                prevMessages.filter((message) => message.chatIdx !== chatIdx)
-            );
+            setMessages((prevMessages) => prevMessages.filter((message) => message.chatIdx !== chatIdx));
         } catch (error) {
-            console.error("메시지 삭제 오류:", error);
+            console.error('메시지 삭제 오류:', error);
         }
     };
-
-
 
     // 클립보드에 텍스트 복사
     const copyToClipboard = (text: string) => {
@@ -200,7 +191,7 @@ export default function ChatbotPage() {
     };
     const scrollToBottom = (animated = true) => {
         if (scrollViewRef.current && isAutoScrollEnabled) {
-            scrollViewRef.current.scrollToEnd({animated});
+            scrollViewRef.current.scrollToEnd({ animated });
         }
     };
 
@@ -220,7 +211,7 @@ export default function ChatbotPage() {
     }, [messages, isTyping]);
 
     const handleScroll = (event) => {
-        const {layoutMeasurement, contentOffset, contentSize} = event.nativeEvent;
+        const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
         const isBottomReached = layoutMeasurement.height + contentOffset.y >= contentSize.height - 20;
         setIsAutoScrollEnabled(isBottomReached);
     };
@@ -231,7 +222,7 @@ export default function ChatbotPage() {
             const newDate = getCurrentDate();
             if (newDate !== currentDate) {
                 // 날짜 변경 시 시스템 메시지 추가
-                setMessages(prevMessages => [
+                setMessages((prevMessages) => [
                     ...prevMessages,
                     {
                         createdAt: newDate,
@@ -256,12 +247,10 @@ export default function ChatbotPage() {
         return () => clearInterval(timer);
     }, [currentDate]);
 
-
     useEffect(() => {
-        setUserAvatar(profileImageUri ? {uri: profileImageUri} : BambooPanda);
+        setUserAvatar(profileImageUri ? { uri: profileImageUri } : BambooPanda);
         // console.log('프로필 이미지 URI가 변경됨:', profileImageUri || '기본 이미지(BambooPanda)');
     }, [profileImageUri]);
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -305,7 +294,6 @@ export default function ChatbotPage() {
         fetchData();
     }, []);
 
-
     useFocusEffect(
         React.useCallback(() => {
             const fetchProfileImage = async () => {
@@ -326,10 +314,8 @@ export default function ChatbotPage() {
         }, [])
     );
 
-
-
     // 초기 로딩용 useEffect
-// 입력 중 애니메이션 관리
+    // 입력 중 애니메이션 관리
     useEffect(() => {
         if (isTyping) {
             const typingInterval = setInterval(() => {
@@ -344,7 +330,6 @@ export default function ChatbotPage() {
             setTypingDots(''); // 애니메이션 초기화
         }
     }, [isTyping]);
-
 
     // 새로운 useEffect 추가하여 DB에서 채팅 기록 가져오기
     useEffect(() => {
@@ -384,10 +369,10 @@ s
         const newEvaluation = messageToUpdate.evaluation === type ? null : type;
 
         // 메시지 상태 업데이트
-        setMessages(prevMessages =>
+        setMessages((prevMessages) =>
             prevMessages.map((msg, index) => {
                 if (index === messageIndex && msg.sender === 'bot') {
-                    return {...msg, evaluation: newEvaluation};
+                    return { ...msg, evaluation: newEvaluation };
                 }
                 return msg;
             })
@@ -397,7 +382,7 @@ s
         try {
             await axios.put(`${serverAddress}/api/chat/updateEvaluation`, {
                 chatIdx: messageToUpdate.chatIdx,
-                evaluation: newEvaluation
+                evaluation: newEvaluation,
             });
             console.log('Evaluation updated in DB:', newEvaluation);
         } catch (error) {
@@ -407,7 +392,7 @@ s
 
     useEffect(() => {
         if (scrollViewRef.current && messages.length > 0) {
-            scrollViewRef.current.scrollToEnd({animated: true});
+            scrollViewRef.current.scrollToEnd({ animated: true });
         }
     }, [messages]);
 
@@ -426,53 +411,51 @@ s
             if (countdown <= 0) {
                 clearInterval(countdownIntervalRef.current!);
                 countdownIntervalRef.current = null;
-                console.log("[Countdown] 종료. 메시지 전송.");
+                console.log('[Countdown] 종료. 메시지 전송.');
                 sendBotResponse(); // 챗봇에게 메시지 전송
             }
         }, 1000);
     };
 
-// 카운트다운 중지 함수
+    // 카운트다운 중지 함수
     const stopCountdown = () => {
         setIsTyping(false); // 입력 시 typing 상태 초기화
         if (countdownIntervalRef.current !== null) {
             clearInterval(countdownIntervalRef.current);
             countdownIntervalRef.current = null;
-            console.log("[Countdown] 중지");
+            console.log('[Countdown] 중지');
         }
     };
-
-
 
     // 챗봇 응답 전송 함수
     const sendBotResponse = async () => {
         if (messagesToSendRef.current.length === 0) return;
 
-        const combinedMessages = messagesToSendRef.current.join(" ");
-        const croomIdx = await AsyncStorage.getItem("croomIdx");
+        const combinedMessages = messagesToSendRef.current.join(' ');
+        const croomIdx = await AsyncStorage.getItem('croomIdx');
         if (!croomIdx) {
-            console.error("croomIdx not found in AsyncStorage");
+            console.error('croomIdx not found in AsyncStorage');
             return;
         }
 
         const payload = {
             userEmail: userEmail,
             croomIdx: parseInt(croomIdx),
-            chatter: "user",
+            chatter: 'user',
             chatContent: combinedMessages,
         };
 
         try {
-            console.log("Payload before sending to server:", payload);
+            console.log('Payload before sending to server:', payload);
 
             const response = await axios.post(serverUrl, payload, {
-                headers: { "Content-Type": "application/json" },
+                headers: { 'Content-Type': 'application/json' },
             });
 
-            console.log("Bot response:", response.data);
+            console.log('Bot response:', response.data);
 
-            const botMessages = response.data.chatContent.split("[LB]").map((msg, subIdx) => ({
-                sender: "bot",
+            const botMessages = response.data.chatContent.split('[LB]').map((msg, subIdx) => ({
+                sender: 'bot',
                 text: msg.trim(),
                 avatar: BambooHead,
                 name: chatbotName,
@@ -498,16 +481,9 @@ s
 
             messagesToSendRef.current = [];
         } catch (error) {
-            console.error("Error sending bot response:", error);
+            console.error('Error sending bot response:', error);
         }
     };
-
-
-
-
-
-
-
 
     // 입력 필드 변경 핸들러
     const handleInputChange = (text: string) => {
@@ -519,59 +495,54 @@ s
             return;
         }
 
-        if (text.trim() === "") {
+        if (text.trim() === '') {
             // 입력 필드가 비어 있는 경우
             if (!isCountdownStarted) {
                 // 카운트다운이 시작되지 않은 경우에만 시작
                 startCountdown();
                 setIsCountdownStarted(true);
-                console.log("[Countdown] 입력 필드가 비어있음. 카운트다운 시작.");
+                console.log('[Countdown] 입력 필드가 비어있음. 카운트다운 시작.');
             }
         } else {
             // 입력 중인 경우
             if (isCountdownStarted) {
                 stopCountdown();
                 setIsCountdownStarted(false);
-                console.log("[Countdown] 입력 중. 카운트다운 중지.");
+                console.log('[Countdown] 입력 중. 카운트다운 중지.');
             }
         }
     };
 
-
-
-// 메시지 전송 함수
+    // 메시지 전송 함수
     const sendMessage = async () => {
         if (input.trim()) {
             const userMessage: Message = {
-                sender: "user",
+                sender: 'user',
                 text: input.trim(),
                 avatar: userAvatar, // 사용자 아바타를 추가
                 name: userNick,
-                timestamp: new Date().toLocaleTimeString("ko-KR", {
-                    hour: "2-digit",
-                    minute: "2-digit",
+                timestamp: new Date().toLocaleTimeString('ko-KR', {
+                    hour: '2-digit',
+                    minute: '2-digit',
                 }),
-                createdAt: new Date().toLocaleDateString("ko-KR"),
+                createdAt: new Date().toLocaleDateString('ko-KR'),
                 showTimestamp: true,
             };
 
-            console.log("User message being sent:", userMessage);
-            setMessages((prevMessages) =>
-                updateTimestamps([...prevMessages, userMessage])
-            );
+            console.log('User message being sent:', userMessage);
+            setMessages((prevMessages) => updateTimestamps([...prevMessages, userMessage]));
 
             // 메시지 배열에 `[LB]` 포함하여 추가
-            messagesToSendRef.current.push(input.trim() + " [LB]");
-            setInput("");
+            messagesToSendRef.current.push(input.trim() + ' [LB]');
+            setInput('');
 
             // 세션 활성화 및 카운트다운 시작
             setIsActiveSession(true); // 세션 활성화
             startCountdown(); // 카운트다운 시작
             setIsCountdownStarted(true);
-            console.log("[Session] 세션 활성화됨.");
+            console.log('[Session] 세션 활성화됨.');
         }
     };
-
 
     const getCurrentTime = (): string => {
         const now = new Date();
@@ -595,8 +566,6 @@ s
         });
     };
 
-
-
     const shouldShowTimestamp = (messageIndex: number, currentMessage: Message, allMessages: Message[]): boolean => {
         const nextMessage = allMessages[messageIndex + 1];
 
@@ -610,42 +579,35 @@ s
         return true;
     };
 
-
     // 평가 버튼 컴포넌트
     const EvaluationButtons = ({ message, index }: { message: Message; index: number }) => {
-        if (message.sender !== "bot") return null;
+        if (message.sender !== 'bot') return null;
 
         // 현재 메시지가 응답의 마지막 말풍선인지 확인
-        const isLastMessage = messages[index + 1]?.sender !== "bot";
+        const isLastMessage = messages[index + 1]?.sender !== 'bot';
 
         if (!isLastMessage) return null; // 마지막 메시지가 아니면 평가 버튼을 렌더링하지 않음
 
         return (
             <View style={styles.evaluationContainer}>
                 <TouchableOpacity
-                    onPress={() => handleEvaluation(index, "like")}
-                    style={[
-                        styles.evaluationButton,
-                        message.evaluation === "like" && styles.evaluationButtonActive,
-                    ]}
+                    onPress={() => handleEvaluation(index, 'like')}
+                    style={[styles.evaluationButton, message.evaluation === 'like' && styles.evaluationButtonActive]}
                 >
                     <Ionicons
-                        name={message.evaluation === "like" ? "thumbs-up" : "thumbs-up-outline"}
+                        name={message.evaluation === 'like' ? 'thumbs-up' : 'thumbs-up-outline'}
                         size={14}
-                        color={message.evaluation === "like" ? "#4a9960" : "#666"}
+                        color={message.evaluation === 'like' ? '#4a9960' : '#666'}
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => handleEvaluation(index, "dislike")}
-                    style={[
-                        styles.evaluationButton,
-                        message.evaluation === "dislike" && styles.evaluationButtonActive,
-                    ]}
+                    onPress={() => handleEvaluation(index, 'dislike')}
+                    style={[styles.evaluationButton, message.evaluation === 'dislike' && styles.evaluationButtonActive]}
                 >
                     <Ionicons
-                        name={message.evaluation === "dislike" ? "thumbs-down" : "thumbs-down-outline"}
+                        name={message.evaluation === 'dislike' ? 'thumbs-down' : 'thumbs-down-outline'}
                         size={14}
-                        color={message.evaluation === "dislike" ? "#e74c3c" : "#666"}
+                        color={message.evaluation === 'dislike' ? '#e74c3c' : '#666'}
                     />
                 </TouchableOpacity>
             </View>
@@ -754,9 +716,8 @@ s
     }, [messages]); // 메시지가 변경될 때 실행
 
     return (
-
         <KeyboardAvoidingView
-            style={{flex: 1}}
+            style={{ flex: 1 }}
             behavior={Platform.OS === 'ios' ? 'padding' : undefined}
             keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
         >
@@ -764,11 +725,11 @@ s
                 <ScrollView
                     ref={scrollViewRef}
                     style={styles.chatArea}
-                    contentContainerStyle={[styles.chatContent, {paddingBottom: height * 0.02}]} // 입력창 높이만큼 여유 공간 추가
+                    contentContainerStyle={[styles.chatContent, { paddingBottom: height * 0.02 }]} // 입력창 높이만큼 여유 공간 추가
                     showsVerticalScrollIndicator={false}
                     onContentSizeChange={() => {
                         if (isAutoScrollEnabled) {
-                            scrollViewRef.current?.scrollToEnd({animated: true});
+                            scrollViewRef.current?.scrollToEnd({ animated: true });
                         }
                     }}
                     onScroll={handleScroll}
@@ -796,9 +757,8 @@ s
                             </View>
                         </View>
                     )}
-
                 </ScrollView>
-                <View style={[styles.inputContainer, {marginTop: -height * 0.02}]}>
+                <View style={[styles.inputContainer, { marginTop: -height * 0.02 }]}>
                     <TextInput
                         style={styles.input}
                         value={input}
@@ -806,14 +766,14 @@ s
                         placeholder="이야기 입력하기.."
                         placeholderTextColor="#707070"
                         multiline={true}
-                        minHeight={height * 0.044}  // 최소 높이
-                        maxHeight={height * 0.2}   // 최대 높이
+                        minHeight={height * 0.044} // 최소 높이
+                        maxHeight={height * 0.2} // 최대 높이
                         onContentSizeChange={() => {
-                            scrollViewRef.current?.scrollToEnd({animated: true});
+                            scrollViewRef.current?.scrollToEnd({ animated: true });
                         }}
                     />
                     <TouchableOpacity style={styles.iconButton} onPress={sendMessage}>
-                        <Ionicons name="arrow-up" size={20} color="#fff"/>
+                        <Ionicons name="arrow-up" size={20} color="#fff" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -823,11 +783,12 @@ s
 const styles = StyleSheet.create({
     dateHeaderContainer: {
         backgroundColor: 'rgba(128, 128, 128, 0.2)', // 반투명 회색 배경
-        marginVertical: 40, // 상하 여백 축소
+        marginVertical: 10, // 상하 여백 축소
         paddingVertical: 5, // 상하 패딩
         paddingHorizontal: 25, // 좌우 패딩 추가
         borderRadius: 15, // 둥근 테두리
         alignSelf: 'center', // 가운데 정렬
+        marginTop: 10,
     },
     firstBotResponseSpacing: {
         marginTop: 20, // 원하는 간격 크기 (20px)
@@ -877,9 +838,9 @@ const styles = StyleSheet.create({
         borderRadius: 12, // 모서리 둥글게
         padding: 2, // 내부 여백
         marginBottom: -8, // 시간과의 세로 간격
-        shadowColor: "#000", // 그림자 색상
+        shadowColor: '#000', // 그림자 색상
         left: -5,
-        top:2,
+        top: 2,
         shadowOffset: {
             width: 0,
             height: 1,
@@ -898,7 +859,6 @@ const styles = StyleSheet.create({
     evaluationButtonActive: {
         backgroundColor: '#f8f9fa',
         borderRadius: 8,
-
     },
 
     // 메시지와 시간 텍스트를 감싸는 컨테이너
@@ -915,7 +875,7 @@ const styles = StyleSheet.create({
         color: '#999', // 텍스트 색상
         marginTop: 2, // 평가 버튼과의 간격
         left: -5,
-        top:8
+        top: 8,
     },
 
     // 메시지의 기본 스타일
@@ -937,7 +897,7 @@ const styles = StyleSheet.create({
     // 사용자 메시지의 스타일
     userMessage: {
         backgroundColor: '#4a9960', // 사용자 메시지 배경색
-        marginLeft: 5,  // 말풍선 꼬리 공간 확보
+        marginLeft: 5, // 말풍선 꼬리 공간 확보
         borderTopRightRadius: 3, // 오른쪽 상단 모서리를 더 둥글게
         top: 5,
         left: -8,
@@ -956,7 +916,7 @@ const styles = StyleSheet.create({
         flex: 1, // 화면을 가득 채움
         padding: 8, // 내부 여백
         width: '100%', // 전체 너비 사용
-        marginBottom:15
+        marginBottom: 15,
     },
 
     // 메시지 컨테이너 스타일
@@ -973,13 +933,13 @@ const styles = StyleSheet.create({
     userMessageContainer: {
         flexDirection: 'row-reverse', // 사용자 메시지를 오른쪽으로 정렬
         justifyContent: 'flex-start',
-        marginRight:-15
+        marginRight: -15,
     },
     // 봇 메시지 컨테이너 스타일
     botMessageContainer: {
         flexDirection: 'row', // 챗봇 메시지를 왼쪽으로 정렬
         justifyContent: 'flex-start',
-        marginLeft:-15
+        marginLeft: -15,
     },
 
     // 아바타 컨테이너 스타일
@@ -988,8 +948,8 @@ const styles = StyleSheet.create({
         height: 36, // 아바타 높이
         borderRadius: 18, // 원형 모양
         overflow: 'hidden', // 넘치는 부분을 숨김
-        justifyContent:'center',
-        alignItems:'center'
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     // 사용자 아바타 이미지 스타일
@@ -1006,8 +966,9 @@ const styles = StyleSheet.create({
         height: '100%',
         resizeMode: 'contain', // 기본 이미지에 맞춰 조정
         borderRadius: 15, // 사각형에 더 가까운 스타일
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 10,
     },
 
     // 메시지 컨텐츠 스타일
@@ -1025,6 +986,7 @@ const styles = StyleSheet.create({
     // 봇 메시지 컨텐츠 정렬 스타일
     botMessageContent: {
         alignItems: 'flex-start', // 왼쪽 정렬
+        marginLeft: 5,
     },
 
     // 채팅 컨텐츠 스타일
@@ -1039,7 +1001,7 @@ const styles = StyleSheet.create({
         marginRight: 12, // 말풍선 꼬리 공간 확보
         borderTopLeftRadius: 3, // 왼쪽 상단 모서리를 더 둥글게
         top: 5, // 기본 위치 설정 (위치 조정이 필요한 경우 수정)
-        left:4
+        left: 4,
     },
 
     // 발신자 이름 텍스트 스타일
@@ -1053,16 +1015,14 @@ const styles = StyleSheet.create({
 
     // 봇 발신자 이름 정렬 스타일
     botSenderName: {
-      left: 1,
+        left: 1,
     },
 
     // 사용자 발신자 이름 정렬 스타일
     userSenderName: {
-      top:1.2,
-      left:-8
+        top: 1.2,
+        left: -8,
     },
-
-
 
     // 사용자 메시지 텍스트 색상
     userMessageText: {
@@ -1107,6 +1067,4 @@ const styles = StyleSheet.create({
     botAvatarPosition: {
         marginLeft: 5, // 왼쪽 여백 추가
     },
-
-
 });
