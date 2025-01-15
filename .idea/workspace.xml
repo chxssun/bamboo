@@ -6,9 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="21daf45c-5552-4b18-811d-5d638d248ea1" name="Changes" comment="레이아웃 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/app/(tabs)/_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/my-app/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/app/(tabs)/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/context/ProfileContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/context/ProfileContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my-app/storage/storageHelper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/storage/storageHelper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my-app/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/my-app/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements - 복사본.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
