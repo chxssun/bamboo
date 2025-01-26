@@ -1,35 +1,38 @@
 import { Stack } from 'expo-router';
 import { ProfileProvider } from '../context/ProfileContext';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
-import { AppState, AppStateStatus } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import { AppState, AppStateStatus } from 'react-native';
 import { serverAddress } from '@/components/Config';
-import { NavigationContainer } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
+// 스플래시 스크린 자동 숨김 방지
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-    console.log('[RootLayout] 루트 레이아웃 초기화');
-
+    // 폰트 로딩 상태 관리
     const [fontsLoaded] = useFonts({
         SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     });
 
     const handleAppStateChange = async (nextAppState: AppStateStatus) => {
         try {
+            console.log(`[AppState Change] New AppState: ${nextAppState}`);
             const userEmail = await AsyncStorage.getItem('userEmail');
+
             if (userEmail) {
                 if (nextAppState === 'active') {
                     await updateUserStatus(userEmail, 'active');
                 } else if (nextAppState === 'background') {
                     await updateUserStatus(userEmail, 'inactive');
                 }
+            } else {
+                console.warn('[AppState Change] No user email found in AsyncStorage.');
             }
         } catch (error) {
-            console.error('Error handling app state change:', error);
+            console.error('[AppState Change] Error handling app state change:', error);
         }
     };
 
@@ -40,40 +43,51 @@ export default function RootLayout() {
                 status,
             });
         } catch (error) {
-            console.error(`Failed to update status: ${error.message}`);
+            console.error(`[User Status Update] Failed to update status: ${error.message}`);
         }
     };
 
+    // 앱 상태 변경 감지
     useEffect(() => {
         const subscription = AppState.addEventListener('change', handleAppStateChange);
+
+        // 초기 상태 설정
+        (async () => {
+            try {
+                const userEmail = await AsyncStorage.getItem('userEmail');
+                if (userEmail) {
+                    const initialState = AppState.currentState === 'active' ? 'active' : 'inactive';
+                    await updateUserStatus(userEmail, initialState);
+                }
+            } catch (error) {
+                console.error('[Initial State] Error updating initial user status:', error);
+            }
+        })();
+
         return () => {
             subscription.remove();
         };
     }, []);
 
+    // 폰트 로딩 완료 시 스플래시 스크린 숨김
+    useEffect(() => {
+        if (fontsLoaded) {
+            SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded]);
+
+    // 폰트가 로드되지 않았으면 null 반환
     if (!fontsLoaded) {
-        console.log('[RootLayout] 폰트 로딩 중...');
         return null;
     }
 
     return (
         <ProfileProvider>
-            <NavigationContainer
-                onStateChange={(state) => {
-                    console.log('[Navigation] 상태 변경:', state);
-                }}
-            >
-                <Stack
-                    screenOptions={{
-                        headerShown: false,
-                        animation: 'none',
-                    }}
-                >
-                    <Stack.Screen name="(init)" options={{ gestureEnabled: true }} />
-                    <Stack.Screen name="(join)" options={{ gestureEnabled: true }} />
-                    <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
-                </Stack>
-            </NavigationContainer>
+            <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(init)" options={{ gestureEnabled: true }} />
+                <Stack.Screen name="(join)" options={{ gestureEnabled: true }} />
+                <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
+            </Stack>
         </ProfileProvider>
     );
 }
