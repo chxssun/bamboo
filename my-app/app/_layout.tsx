@@ -7,6 +7,7 @@ import { AppState, AppStateStatus } from 'react-native';
 import { serverAddress } from '@/components/Config';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { NavigationContainer } from '@react-navigation/native';
 
 // 스플래시 스크린 자동 숨김 방지
 SplashScreen.preventAutoHideAsync();
@@ -82,12 +83,14 @@ export default function RootLayout() {
     }
 
     return (
-        <ProfileProvider>
-            <Stack screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="(init)" options={{ gestureEnabled: true }} />
-                <Stack.Screen name="(join)" options={{ gestureEnabled: true }} />
-                <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
-            </Stack>
-        </ProfileProvider>
+        <NavigationContainer>
+            <ProfileProvider>
+                <Stack screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name="(init)" options={{ gestureEnabled: true }} />
+                    <Stack.Screen name="(join)" options={{ gestureEnabled: true }} />
+                    <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
+                </Stack>
+            </ProfileProvider>
+        </NavigationContainer>
     );
 }

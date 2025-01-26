@@ -25,7 +25,7 @@ import { serverAddress } from '../../components/Config';
 import { ChatMessage, getChatHistory } from '../../components/getChatHistory';
 import * as Clipboard from 'expo-clipboard';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'; // KeyboardAwareScrollView 임포트
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import { useProfile } from '../../context/ProfileContext';
 import { ThemedText } from '@/components/ThemedText';
 
@@ -84,6 +84,7 @@ export default function ChatbotPage() {
     const countdownDuration = 3; // 5초 카운트다운
     const messagesToSendRef = useRef<string[]>([]);
     const countdownIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const navigation = useNavigation();
 
     useEffect(() => {
         if (isTyping) {
